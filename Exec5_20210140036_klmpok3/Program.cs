@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,22 +47,49 @@ namespace Exec5_20210140036_klmpok3
                 tw = newnode;
                 return;
             }
-            node previous, current;
+            node previous, lt;
             previous = tw;
-            current = tw;
+            lt = tw;
 
-            while ((current != null) && (rollNo == current.rollNumber))
+            while ((lt != null) && (rollNo == lt.rollNumber))
             {
-                if (rollNo == current.rollNumber)
+                if (rollNo == lt.rollNumber)
                 {
                     Console.WriteLine();
                     return;
                 }
-                previous.next = current;
+                previous.next = lt;
                 previous.next = newnode;
             }
-            newnode.next = current;
+            newnode.next = lt;
             previous.next = newnode;
+        }
+
+        public bool delete(int rollNo)
+        {
+            node previous, current;
+            previous = current = null;
+            if (Display(rollNo, ref previous, ref current) == false)
+                return false;
+            previous.next = current.next;
+            if (current == tw)
+                tw = tw.next;
+            return true;
+        }
+
+        public bool Display(int rollNo, ref node previous, ref node lt)
+        {
+            previous = tw;
+            lt = tw;
+            while ((lt != null) && (rollNo != lt.rollNumber))
+            {
+                previous = lt;
+                lt = lt.next;
+            }
+            if (lt == null)
+                return false;
+            else
+                return true;
         }
         static void Main(string[] args)
         {
