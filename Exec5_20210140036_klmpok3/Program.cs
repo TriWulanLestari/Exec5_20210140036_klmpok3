@@ -91,6 +91,28 @@ namespace Exec5_20210140036_klmpok3
             else
                 return true;
         }
+
+        public void Traverse()
+        {
+            if (listEmpty())
+                Console.WriteLine("\nThe records in the list are: ");
+            else
+            {
+                Console.WriteLine("\nThe records in the list are: ");
+                node ltNode;
+                for (ltNode = tw; ltNode != null; ltNode = ltNode.next)
+                    Console.Write(ltNode.rollNumber + " " + ltNode.name + "\n");
+                Console.WriteLine();
+            }
+        }
+
+        public bool listEmpty()
+        {
+            if (tw == null)
+                return true;
+            else
+                return false;
+        }
         static void Main(string[] args)
         {
         }
